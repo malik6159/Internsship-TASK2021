@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				width: 100px;
+				position: absolute;
+				bottom: 90vh;
+			}
+			.green {
+				width: 100px;
+				position: absolute;
+				bottom: 90vh;
+			}
+			.blue {
+				width: 100px;
+				position: absolute;
+				bottom: 90vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container1"></div>
+		<div id="container2"></div>
+		<div id="container3"></div>
+		<script>
+			let appleGeneration = setInterval(() => {
+				let red = document.createElement("img");
+				let green = document.createElement("img");
+				let blue = document.createElement("img");
+				let keys = [];
+
+				red.src = "red.png";
+				green.src = "green.jpg";
+				blue.src = "bluee.png";
+				red.className = "red";
+				blue.className = "blue";
+				green.className = "green";
+
+				red.style.left = innerWidth / 2 + "px";
+				green.style.left = innerWidth / 2 + "px";
+				blue.style.left = innerWidth / 2 + "px";
+
+				container1.appendChild(red);
+				container2.appendChild(green);
+				container3.appendChild(blue);
+
+				let key = setInterval(() => {
+					red.style.top = red.offsetTop + 5 + "px";
+					if (red.offsetTop > 30) {
+						red.style.left = red.offsetLeft - 5 + "px";
+					}
+					for (let i = 8; i < 100; i++) {
+						if (red.offsetTop >= 600) {
+							let value = 600 - i;
+							red.offsetTop = red.offsetTop - value;
+							keys.forEach((key) => {
+								clearInterval(key);
+							});
+						}
+					}
+					green.style.top = green.offsetTop + 5 + "px";
+
+					if (green.offsetTop >= 600) {
+						keys.forEach((key) => {
+							clearInterval(key);
+						});
+					}
+
+					blue.style.top = blue.offsetTop + 5 + "px";
+
+					if (blue.offsetTop > 30) {
+						blue.style.left = blue.offsetLeft + 5 + "px";
+					}
+					for (let i = 8; i < 100; i++) {
+						let value = 600 - i;
+						if (blue.offsetTop >= 600) {
+							blue.offsetTop = blue.offsetTop - i;
+
+							keys.forEach((key) => {
+								clearInterval(key);
+							});
+						}
+					}
+				}, Math.random() * 3000);
+
+				keys.push(key);
+			}, 10);
+		</script>
+	</body>
+</html>
